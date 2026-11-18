@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shift Mountain - Game Off 2026</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    canvas { display: block; }
+    #ui {
+      position: fixed; top: 20px; left: 20px; right: 20px; 
+      display: flex; justify-content: space-between; align-items: flex-start; gap: 16px;
+      pointer-events: none;
+      z-index: 100;
+    }
+    .gear-indicator {
+      background: rgba(0,0,0,0.7); padding: 12px 24px; 
+      border-radius: 8px; color: #ffd700; font-family: 'Courier New', monospace;
+      font-size: 1.2rem; min-width: 120px; text-align: center;
+      backdrop-filter: blur(4px);
+    }
+    #instructions {
+      background: rgba(0,0,0,0.7); padding: 16px; 
+      border-radius: 8px; color: #fff; font-family: sans-serif; font-size: 0.9rem;
+      line-height: 1.5; max-width: 300px;
+    }
+    #instructions kbd {
+      background: #333; color: #fff; padding: 4px 8px; border-radius: 4px; margin: 2px;
+      font-family: 'Courier New', monospace; font-size: 0.8rem;
+    }
+  </style>
+</head>
+<body>
+  <div id="ui">
+    <div class="gear-indicator" id="gearDisplay">GEAR: 1</div>
+    <div id="instructions">
+      <strong>CONTROLS</strong><br>
+      <kbd>SHIFT</kbd> - Shift gears<br>
+      <strong>OBJECTIVE</strong><br>
+      Reach Candy Mountain while avoiding obstacles. Each gear changes more than just your speed!
+    </div>
+  </div>
+  <script src="js/phaser.min.js"></script>
+  <script>
+    // Phaser 3 Game Configuration
+    const PHASER_CONFIG = {
+      type: Phaser.AUTO,
+      width: 400,
+      height: 600,
+      parent: 'phaser-example',
+      physics: {
+        default: 'arcade',
+        arcade: {
+          gravity: { y: 300 },
+          debug: false
+        }
+      },
+      scene: [MenuScene, GameScene, GameOverScene],
+      backgroundColor: '#87CEEB',
+      pixelArt: true,
+      roundPixels: true
+    };
+  </script>
+  <script src="js/scenes/MenuScene.js"></script>
+  <script src="js/scenes/GameScene.js"></script>
+  <script src="js/scenes/GameOverScene.js"></script>
+  <script>
+    const config = PHASER_CONFIG;
+    const game = new Phaser.Game(config);
+  </script>
+</body>
+</html>
