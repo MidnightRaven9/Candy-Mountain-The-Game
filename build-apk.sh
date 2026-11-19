@@ -60,8 +60,8 @@ cat > "$ANDROID_PROJECT/AndroidManifest.xml" << 'MANIFEST'
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shif.mountain"
-    android:versionCode="1"
-    android:versionName="1.0">
+    android:versionCode="4"
+    android:versionName="1.0.4">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
@@ -133,6 +133,8 @@ import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.app.Activity;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 
 public class MainActivity extends Activity {
     private WebView webview;
@@ -140,10 +142,14 @@ public class MainActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        getWindow().setBackgroundDrawable(new ColorDrawable(Color.rgb(135, 206, 235)));
+
         webview = new WebView(this);
+        webview.setBackgroundColor(Color.rgb(135, 206, 235));
         webview.setWebViewClient(new WebViewClient());
         webview.getSettings().setJavaScriptEnabled(true);
         webview.getSettings().setDomStorageEnabled(true);
+        webview.getSettings().setLoadWithOverviewMode(true);
         webview.loadUrl("file:///android_asset/www/index.html");
         setContentView(webview, new android.view.ViewGroup.LayoutParams(
             android.view.ViewGroup.LayoutParams.MATCH_PARENT,

@@ -12,15 +12,16 @@ class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('charlie', 'assets/charlie-unicorn.svg');
-    this.load.image('buddyBlue', 'assets/buddy-blue.svg');
-    this.load.image('buddyPink', 'assets/buddy-pink.svg');
+    this.load.image('charlie', 'assets/charlie-unicorn.png');
+    this.load.image('buddyBlue', 'assets/buddy-blue.png');
+    this.load.image('buddyPink', 'assets/buddy-pink.png');
   }
 
   create() {
     const { width, height } = this.scale;
     const floorY = height - 34;
     const ceilY = 34;
+    if (window.gameStatus) window.gameStatus('Play');
 
     TextureFactory.createTextures(this);
 
@@ -48,16 +49,20 @@ class GameScene extends Phaser.Scene {
     // Charlie: friendly white parody unicorn with rainbow-toned mane.
     this.player = this.physics.add.sprite(132, 338, 'charlie');
     this.player.setOrigin(0.5);
-    this.player.setScale(0.36);
+    this.player.setScale(165 / this.player.height);
     this.player.setCollideWorldBounds(false);
     this.player.setGravityY(520);
-    this.player.body.setSize(430, 330);
-    this.player.body.setOffset(148, 208);
+    const pw = this.player.width;
+    const ph = this.player.height;
+    this.player.body.setSize(pw * 0.72, ph * 0.34);
+    this.player.body.setOffset(pw * 0.12, ph * 0.62);
     this.player.setDepth(20);
 
     // The two obnoxious companions from the video—floating buddies.
-    this.companion1 = this.add.sprite(width * 0.38, height * 0.24, 'buddyBlue').setScale(1.25).setDepth(12).setAlpha(0.96);
-    this.companion2 = this.add.sprite(width * 0.74, height * 0.56, 'buddyPink').setScale(1.22).setDepth(12).setAlpha(0.96);
+    this.companion1 = this.add.sprite(width * 0.38, height * 0.24, 'buddyBlue').setDepth(12).setAlpha(0.96);
+    this.companion1.setScale(92 / this.companion1.height);
+    this.companion2 = this.add.sprite(width * 0.74, height * 0.56, 'buddyPink').setDepth(12).setAlpha(0.96);
+    this.companion2.setScale(88 / this.companion2.height);
     this.buddyBase = [
       { s: this.companion1, y: this.companion1.y, phase: 0 },
       { s: this.companion2, y: this.companion2.y, phase: 2.1 }
@@ -110,7 +115,7 @@ class GameScene extends Phaser.Scene {
       this.shiftGear();
     });
 
-    this.nextObstacleAt = 650;
+    this.nextObstacleAt = 1600;
 
     // Clouds drifting across the painted sky.
     this.clouds = [];
@@ -256,6 +261,14 @@ class GameScene extends Phaser.Scene {
 
   update(time, delta) {
     if (this.isGameOver) return;
+
+    this._badgeClock = (this._badgeClock || 0) + delta;
+    if (this._badgeClock > 500) {
+      this._badgeClock = 0;
+      if (window.gameStatus) {
+        window.gameStatus('Play · ' + Math.floor(this.distance) + 'm · G' + this.gear);
+      }
+    }
 
     const dt = Math.min(delta / 1000, 0.05);
     const travel = (this.nitroActive ? this.baseSpeed * 1.8 : this.baseSpeed) * dt;

@@ -84,3 +84,8 @@ MIT — see `LICENSE`. Free for learning, jams, and modification.
 - Submissions close December 1, 2026
 
 Inspired by the *Charlie The Unicorn* video as a parody fan homage. Fair-use parody for game-jam purposes.
+
+
+## v1.0.4
+
+Sprites are shipped as transparent PNG files (Android WebView does not reliably decode SVG from `file://` assets). The WebView and window background are forced sky-blue, and a corner badge shows build/scene status plus a live gameplay heartbeat for diagnostics.
