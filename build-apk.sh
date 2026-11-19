@@ -197,6 +197,7 @@ ICONPY
 # STEP 4: Copy game assets into assets/www/
 # ============================================================
 cp "$GAME_DIR/index.html" "$ANDROID_PROJECT/assets/www/index.html"
+cp -a "$GAME_DIR/assets" "$ANDROID_PROJECT/assets/www/assets"
 cp "$GAME_DIR/js/phaser.min.js" "$ANDROID_PROJECT/assets/www/js/phaser.min.js"
 cp "$GAME_DIR/js/art.js" "$ANDROID_PROJECT/assets/www/js/art.js"
 cp "$GAME_DIR/js/scenes/MenuScene.js" "$ANDROID_PROJECT/assets/www/js/scenes/MenuScene.js"

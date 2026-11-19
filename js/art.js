@@ -1,7 +1,7 @@
 /** Procedural parody artwork for Candy Mountain The Game. No external assets. */
 const TextureFactory = {
   createTextures: function (scene) {
-    if (scene.textures.exists('unicorn')) return;
+    if (scene.textures.exists('sky')) return;
 
     var g = scene.add.graphics();
 
@@ -64,19 +64,6 @@ const TextureFactory = {
     g.fillStyle(0x2a1739, 0.98);
     g.fillPoints([[0, 395], [92, 372], [170, 402], [254, 374], [330, 405], [428, 380], [514, 410], [604, 382], [704, 412], [800, 390], [800, 500], [0, 500]], true);
     g.generateTexture('sky', W, H);
-
-    // Detailed parody unicorn.
-    g.clear();
-    this.drawUnicorn(g, 0, 0, 1);
-    g.generateTexture('unicorn', 96, 78);
-
-    // Companion buddies.
-    g.clear();
-    this.drawBuddy(g, 0x2bcaff, 2.5);
-    g.generateTexture('buddy', 54, 46);
-    g.clear();
-    this.drawBuddy(g, 0xc366ff, 2.5);
-    g.generateTexture('buddyAlt', 54, 46);
 
     // Ground texture (grass, candy stripes, trail).
     g.clear();

@@ -11,6 +11,12 @@ class GameScene extends Phaser.Scene {
     this.isGameOver = false;
   }
 
+  preload() {
+    this.load.image('charlie', 'assets/charlie-unicorn.svg');
+    this.load.image('buddyBlue', 'assets/buddy-blue.svg');
+    this.load.image('buddyPink', 'assets/buddy-pink.svg');
+  }
+
   create() {
     const { width, height } = this.scale;
     const floorY = height - 34;
@@ -40,17 +46,18 @@ class GameScene extends Phaser.Scene {
     this.ground.add(groundBody).add(ceilingBody);
 
     // Charlie: friendly white parody unicorn with rainbow-toned mane.
-    this.player = this.physics.add.sprite(118, floorY - 32, 'unicorn');
-    this.player.setOrigin(0.5, 0.55);
+    this.player = this.physics.add.sprite(132, 338, 'charlie');
+    this.player.setOrigin(0.5);
+    this.player.setScale(0.36);
     this.player.setCollideWorldBounds(false);
     this.player.setGravityY(520);
-    this.player.body.setSize(66, 52);
-    this.player.body.setOffset(14, 16);
+    this.player.body.setSize(430, 330);
+    this.player.body.setOffset(148, 208);
     this.player.setDepth(20);
 
     // The two obnoxious companions from the video—floating buddies.
-    this.companion1 = this.add.sprite(width * 0.38, height * 0.24, 'buddy').setScale(1.15).setDepth(12).setAlpha(0.96);
-    this.companion2 = this.add.sprite(width * 0.74, height * 0.56, 'buddyAlt').setScale(1.12).setDepth(12).setAlpha(0.96);
+    this.companion1 = this.add.sprite(width * 0.38, height * 0.24, 'buddyBlue').setScale(1.25).setDepth(12).setAlpha(0.96);
+    this.companion2 = this.add.sprite(width * 0.74, height * 0.56, 'buddyPink').setScale(1.22).setDepth(12).setAlpha(0.96);
     this.buddyBase = [
       { s: this.companion1, y: this.companion1.y, phase: 0 },
       { s: this.companion2, y: this.companion2.y, phase: 2.1 }

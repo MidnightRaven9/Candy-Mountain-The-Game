@@ -3,6 +3,12 @@ class MenuScene extends Phaser.Scene {
     super({ key: 'MenuScene' });
   }
 
+  preload() {
+    this.load.image('charlie', 'assets/charlie-unicorn.svg');
+    this.load.image('buddyBlue', 'assets/buddy-blue.svg');
+    this.load.image('buddyPink', 'assets/buddy-pink.svg');
+  }
+
   create() {
     const { width, height } = this.scale;
     const centerX = width / 2;
@@ -16,9 +22,9 @@ class MenuScene extends Phaser.Scene {
     this.add.image(centerX + 115, height + 40, 'mountain').setOrigin(0.5, 1).setScale(1.55).setAlpha(0.96);
 
     // Running parody unicorn toward Candy Mountain.
-    this.add.image(centerX - 42, height - 96, 'unicorn').setScale(1.25);
-    this.add.image(width - 128, height - 126, 'buddy').setScale(1.15);
-    this.add.image(width - 56, height - 165, 'buddyAlt').setScale(1.0);
+    this.add.image(260, height - 108, 'charlie').setScale(0.34).setDepth(20);
+    this.add.image(width - 148, height - 118, 'buddyBlue').setScale(1.25).setDepth(18);
+    this.add.image(width - 82, height - 195, 'buddyPink').setScale(1.08).setDepth(17);
 
     // Title block with strong contrast over sky.
     this.add.text(centerX, 46, 'CANDY MOUNTAIN', {

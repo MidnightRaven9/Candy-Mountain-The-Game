@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -175 720 715" width="720" height="715">
+  <title>Charlie, original parody unicorn</title>
+  <defs>
+    <linearGradient id="bodyGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffef9"/>
+      <stop offset="0.62" stop-color="#f4f0df"/>
+      <stop offset="1" stop-color="#d8d3c4"/>
+    </linearGradient>
+    <linearGradient id="headGrad" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#fffef9"/>
+      <stop offset="1" stop-color="#eee9da"/>
+    </linearGradient>
+    <linearGradient id="hornGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff7a8"/>
+      <stop offset="0.45" stop-color="#ffd24e"/>
+      <stop offset="1" stop-color="#f57a20"/>
+    </linearGradient>
+    <linearGradient id="muzzleGrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#f7dfd6"/>
+      <stop offset="1" stop-color="#e7b9ad"/>
+    </linearGradient>
+    <linearGradient id="tailGrad" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff5c93"/>
+      <stop offset="0.45" stop-color="#ff9a3d"/>
+      <stop offset="1" stop-color="#20d0c4"/>
+    </linearGradient>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="7" flood-color="#1a1028" flood-opacity="0.38"/>
+    </filter>
+  </defs>
+
+  <g id="charlie" filter="url(#softShadow)" stroke-linejoin="round" stroke-linecap="round">
+    <!-- Back legs, drawn first and shifted behind the body. -->
+    <path d="M132 347 C111 392 91 435 78 479 C99 482 120 469 139 439 C157 408 169 377 181 344 Z" fill="url(#bodyGrad)" stroke="#353b4d" stroke-width="5"/>
+    <rect x="74" y="466" width="74" height="24" rx="12" fill="#243047" stroke="#161f2e" stroke-width="5"/>
+    <path d="M249 382 C225 423 197 452 174 482 C200 487 218 479 239 447 C260 417 273 391 287 366 Z" fill="url(#bodyGrad)" stroke="#353b4d" stroke-width="5"/>
+    <rect x="172" y="468" width="66" height="24" rx="12" fill="#243047" stroke="#161f2e" stroke-width="5"/>
+
+    <!-- Tail flowing behind. -->
+    <path d="M154 274 C92 237 51 288 96 337 C64 330 24 379 88 386 C60 427 122 446 166 391 Z" fill="url(#tailGrad)" stroke="#353b4d" stroke-width="6"/>
+    <path d="M160 330 C120 361 105 415 139 453 C155 420 171 368 195 336 Z" fill="#20d0c4" stroke="#353b4d" stroke-width="6"/>
+    <path d="M176 387 C137 413 133 464 159 500 C177 460 189 431 207 404 Z" fill="#b45cf2" stroke="#353b4d" stroke-width="6"/>
+
+    <!-- Body: rounded rump into chest. -->
+    <path d="M94 304 C96 219 173 174 265 178 C330 179 367 217 371 286 C372 365 302 408 187 413 C125 416 92 364 94 304 Z" fill="url(#bodyGrad)" stroke="#353b4d" stroke-width="6"/>
+    <path d="M230 300 C247 194 286 106 371 91 C430 77 480 122 489 205 C498 286 438 338 341 352 C292 357 250 337 230 300 Z" fill="url(#bodyGrad)" stroke="#353b4d" stroke-width="6"/>
+
+    <!-- Belly shadow. -->
+    <path d="M115 326 C182 365 283 365 355 316 C331 371 260 397 166 397 C134 391 115 366 115 326 Z" fill="#d8d4c7" opacity="0.72"/>
+
+    <!-- Front legs. -->
+    <path d="M313 347 C333 389 361 420 397 451 C375 475 350 472 333 440 C305 401 278 378 245 365 Z" fill="url(#bodyGrad)" stroke="#353b4d" stroke-width="5"/>
+    <rect x="369" y="438" width="72" height="24" rx="12" fill="#243047" stroke="#161f2e" stroke-width="5"/>
+    <path d="M432 328 C482 361 506 394 538 423 C511 442 479 432 446 406 C405 374 376 357 341 358 Z" fill="url(#bodyGrad)" stroke="#353b4d" stroke-width="5"/>
+    <rect x="489" y="406" width="66" height="24" rx="12" fill="#243047" stroke="#161f2e" stroke-width="5"/>
+
+    <!-- Mane streaming from the crest down the back. -->
+    <path d="M396 29 C325 44 259 109 207 187 C174 235 139 269 93 283 C127 310 171 302 204 264 C246 210 292 151 351 106 C375 77 390 54 396 29 Z" fill="#1fc8c4" stroke="#353b4d" stroke-width="6"/>
+    <path d="M373 39 C308 67 253 129 210 197 C255 174 302 143 349 108 C359 77 365 57 373 39 Z" fill="#1292a8" stroke="none"/>
+    <path d="M337 116 C280 151 236 216 196 278 C231 265 270 235 312 191 C325 165 333 139 337 116 Z" fill="#ff5c93" stroke="none"/>
+    <path d="M260 220 C216 261 173 278 132 270 C165 233 192 197 226 160 C249 174 270 194 303 219 C287 220 272 220 260 220 Z" fill="#ff9a3d" stroke="none"/>
+
+
+    <!-- Head and long friendly snout. -->
+    <path d="M279 164 C276 89 356 27 441 48 C506 64 538 130 535 203 C531 255 470 282 390 276 C329 273 282 229 279 164 Z" fill="url(#headGrad)" stroke="#353b4d" stroke-width="6"/>
+    <path d="M434 132 C493 124 546 151 561 197 C568 236 536 262 479 266 C440 259 411 231 402 184 C402 158 413 140 434 132 Z" fill="url(#headGrad)" stroke="#353b4d" stroke-width="6"/>
+    <path d="M474 153 C513 148 538 169 541 201 C541 231 512 246 468 248 C435 242 415 218 416 184 C420 165 440 154 474 153 Z" fill="url(#muzzleGrad)" stroke="#353b4d" stroke-width="6"/>
+
+    <!-- Ear behind horn. -->
+    <path d="M281 91 C229 -12 343 -1 375 72 Z" fill="url(#headGrad)" stroke="#353b4d" stroke-width="6"/>
+    <path d="M288 68 C257 20 327 20 350 61 Z" fill="#ff8eb0" stroke="none"/>
+
+    <!-- Candy-striped horn. -->
+    <path d="M350 61 L405 -145 L458 75 Z" fill="url(#hornGrad)" stroke="#353b4d" stroke-width="6"/>
+    <path d="M366 -5 L431 -36 L443 32 L378 60 Z" fill="#ff5c93" stroke="#353b4d" stroke-width="4"/>
+    <path d="M357 30 L432 -2 L441 55 L366 82 Z" fill="#1fc8c4" stroke="#353b4d" stroke-width="4"/>
+    <path d="M386 -70 L424 -91 L434 -28 L397 -10 Z" fill="#ffffff" stroke="#353b4d" stroke-width="4"/>
+
+    <!-- Face: big glossy eye, lashes, smile, nose and cheek star. -->
+    <ellipse cx="394" cy="145" rx="15" ry="22" fill="#17202e"/>
+    <ellipse cx="401" cy="136" rx="6" ry="7" fill="#ffffff"/>
+    <path d="M378 112 L361 80" stroke="#17202e" stroke-width="6"/>
+    <path d="M399 105 L390 66" stroke="#17202e" stroke-width="6"/>
+    <ellipse cx="480" cy="198" rx="9" ry="5" fill="#915557"/>
+    <path d="M365 219 C410 247 456 246 493 220" fill="none" stroke="#a96725" stroke-width="6" stroke-linecap="round"/>
+    <path d="M338 192 L354 216 L377 211 L361 231 L378 252 L337 235 L318 258 L303 228 L276 224 L307 207 L313 175 L333 196 Z" fill="#ff5c93"/>
+    <path d="M338 204 L349 218 L338 226 L328 218 Z" fill="#ffd84d"/>
+  </g>
+</svg>
