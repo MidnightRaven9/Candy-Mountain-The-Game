@@ -12,18 +12,21 @@ class GameScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('charlie', 'assets/charlie-unicorn.png');
-    this.load.image('buddyBlue', 'assets/buddy-blue.png');
-    this.load.image('buddyPink', 'assets/buddy-pink.png');
+    this.load.image('charlie', SPRITE_DATA.charlie);
+    this.load.image('buddyBlue', SPRITE_DATA.buddyBlue);
+    this.load.image('buddyPink', SPRITE_DATA.buddyPink);
   }
 
   create() {
     const { width, height } = this.scale;
     const floorY = height - 34;
     const ceilY = 34;
-    if (window.gameStatus) window.gameStatus('Play');
-
+    const spriteLoaded = this.textures.exists('charlie');
     TextureFactory.createTextures(this);
+    TextureFactory.ensureCreatures(this);
+    if (window.gameStatus) {
+      window.gameStatus('Play · ' + (spriteLoaded ? 'sprite OK' : 'FALLBACK art'));
+    }
 
     // Full-bleed painted sky and rainbow backdrop.
     this.add.image(width / 2, height / 2, 'sky').setOrigin(0.5);
@@ -202,7 +205,7 @@ class GameScene extends Phaser.Scene {
     this.cameras.main.shake(180, 0.012);
     this.physics.pause();
 
-    this.add.rectangle(400, 250, 800, 500, 0x2a143d, 0.58).setDepth(80);
+    this.add.rectangle(400, 250, 800, 500, 0x101a3a, 0.78).setDepth(80);
     this.add.text(400, 166, 'CRASHED!', {
       fontFamily: 'Courier New', fontSize: 48, fontStyle: 'bold', color: '#ff5c5c',
       stroke: '#2a143d', strokeThickness: 7
@@ -240,7 +243,7 @@ class GameScene extends Phaser.Scene {
     this.cameras.main.stopFollow();
     this.cameras.main.flash(0xffd84d, 500, 0.45);
 
-    this.add.rectangle(400, 250, 800, 500, 0x241538, 0.48).setDepth(80);
+    this.add.rectangle(400, 250, 800, 500, 0x102b3a, 0.72).setDepth(80);
     this.add.text(400, 140, 'YOU REACHED', {
       fontFamily: 'Courier New', fontSize: 36, fontStyle: 'bold', color: '#ffd84d',
       stroke: '#241538', strokeThickness: 7

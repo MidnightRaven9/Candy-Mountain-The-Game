@@ -274,5 +274,53 @@ const TextureFactory = {
   }
 };
 
+/** Last-resort procedural creatures if image decoding is unavailable. */
+TextureFactory.ensureCreatures = function (scene) {
+  var g;
+  if (!scene.textures.exists('charlie')) {
+    g = scene.add.graphics();
+    g.fillStyle(0x000000, 0.18);
+    g.fillEllipse(48, 72, 52, 7);
+    g.fillStyle(0xfaf6ed);
+    g.fillEllipse(34, 47, 42, 27);
+    g.fillPoints([[46, 41], [52, 26], [63, 22], [74, 39], [62, 55]], true);
+    g.fillEllipse(68, 27, 30, 26);
+    g.fillEllipse(77, 33, 21, 14);
+    [16, 28, 48, 61].forEach(function (ox) {
+      g.fillRoundedRect(ox, 52, 8, 20, 4);
+      g.fillStyle(0x2a2535);
+      g.fillRect(ox, 68, 8, 4);
+      g.fillStyle(0xfaf6ed);
+    });
+    var mane = [0x23d5cf, 0x1aa6b4, 0xff4f9a, 0xff8fb5];
+    [[60, 3, 11], [50, 10, 13], [42, 18, 15], [33, 28, 16], [23, 39, 15], [14, 49, 13]].forEach(function (p, i) {
+      g.fillStyle(mane[i % mane.length]);
+      g.fillCircle(p[0], p[1], p[2]);
+    });
+    g.fillStyle(0xffe66d);
+    g.fillTriangle(66, 8, 73, -22, 82, 12);
+    g.fillStyle(0x18212e);
+    g.fillEllipse(72, 26, 6.5, 8.5);
+    g.fillStyle(0xffffff);
+    g.fillCircle(74.4, 23.5, 1.7);
+    g.generateTexture('charlie', 96, 78);
+    g.destroy();
+  }
+  [['buddyBlue', 0x2bcaff], ['buddyPink', 0xc366ff]].forEach(function (pair) {
+    if (scene.textures.exists(pair[0])) return;
+    g = scene.add.graphics();
+    g.fillStyle(pair[1]);
+    g.fillEllipse(25, 26, 34, 26);
+    g.fillStyle(0xffffff);
+    g.fillCircle(20, 22, 4);
+    g.fillCircle(32, 22, 4);
+    g.fillStyle(0x18212e);
+    g.fillCircle(21, 22, 2);
+    g.fillCircle(33, 22, 2);
+    g.generateTexture(pair[0], 52, 46);
+    g.destroy();
+  });
+};
+
 if (typeof window !== 'undefined') window.TextureFactory = TextureFactory;
 if (typeof globalThis !== 'undefined') globalThis.TextureFactory = TextureFactory;

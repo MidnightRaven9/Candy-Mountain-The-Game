@@ -4,17 +4,19 @@ class MenuScene extends Phaser.Scene {
   }
 
   preload() {
-    this.load.image('charlie', 'assets/charlie-unicorn.png');
-    this.load.image('buddyBlue', 'assets/buddy-blue.png');
-    this.load.image('buddyPink', 'assets/buddy-pink.png');
+    this.load.image('charlie', SPRITE_DATA.charlie);
+    this.load.image('buddyBlue', SPRITE_DATA.buddyBlue);
+    this.load.image('buddyPink', SPRITE_DATA.buddyPink);
   }
 
   create() {
     const { width, height } = this.scale;
     const centerX = width / 2;
-    if (window.gameStatus) window.gameStatus('Menu');
-
+    const spriteLoaded = this.textures.exists('charlie');
     TextureFactory.createTextures(this);
+    TextureFactory.ensureCreatures(this);
+    const tex = spriteLoaded ? 'sprite OK' : 'FALLBACK art';
+    if (window.gameStatus) window.gameStatus('Menu · ' + tex);
 
     // Full-bleed painted sunset / rainbow / mountains.
     this.add.image(centerX, height / 2, 'sky');
@@ -69,11 +71,19 @@ class MenuScene extends Phaser.Scene {
       strokeThickness: 5
     }).setOrigin(0.5).setInteractive({ useHandCursor: true });
 
-    const startGame = () => this.scene.start('GameScene');
+    let starting = false;
+    const startGame = () => {
+      if (starting) return;
+      starting = true;
+      try {
+        this.scene.start('GameScene');
+      } catch (err) {
+        if (window.gameReportError) window.gameReportError('MenuScene.start', err);
+        throw err;
+      }
+    };
     this.input.keyboard.on('keydown-SHIFT', startGame);
-    this.input.keyboard.on('keydown_SHIFT', startGame);
     this.input.on('pointerdown', startGame);
-    startHint.on('pointerdown', startGame);
 
     // Small parody credits.
     this.add.text(centerX, height - 22, 'Inspired by Charlie The Unicorn (parody) • An original artwork fan homage', {

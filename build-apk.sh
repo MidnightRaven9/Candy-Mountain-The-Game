@@ -60,8 +60,8 @@ cat > "$ANDROID_PROJECT/AndroidManifest.xml" << 'MANIFEST'
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shif.mountain"
-    android:versionCode="4"
-    android:versionName="1.0.4">
+    android:versionCode="5"
+    android:versionName="1.0.5">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
@@ -206,6 +206,7 @@ cp "$GAME_DIR/index.html" "$ANDROID_PROJECT/assets/www/index.html"
 cp -a "$GAME_DIR/assets" "$ANDROID_PROJECT/assets/www/assets"
 cp "$GAME_DIR/js/phaser.min.js" "$ANDROID_PROJECT/assets/www/js/phaser.min.js"
 cp "$GAME_DIR/js/art.js" "$ANDROID_PROJECT/assets/www/js/art.js"
+cp "$GAME_DIR/js/sprites-data.js" "$ANDROID_PROJECT/assets/www/js/sprites-data.js"
 cp "$GAME_DIR/js/scenes/MenuScene.js" "$ANDROID_PROJECT/assets/www/js/scenes/MenuScene.js"
 cp "$GAME_DIR/js/scenes/GameScene.js" "$ANDROID_PROJECT/assets/www/js/scenes/GameScene.js"
 cp "$GAME_DIR/js/scenes/GameOverScene.js" "$ANDROID_PROJECT/assets/www/js/scenes/GameOverScene.js"
