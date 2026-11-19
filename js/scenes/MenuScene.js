@@ -28,13 +28,17 @@ class MenuScene extends Phaser.Scene {
     }).setOrigin(0.5);
 
     // Start instruction - listen for SHIFT key globally
-    const startHint = this.add.text(centerX, height - 80, 'PRESS SHIFT TO START', {
+    const startHint = this.add.text(centerX, height - 80, 'PRESS SHIFT OR TAP TO START', {
       font: 'bold 20px Courier',
       color: '#0f0',
       align: 'center'
-    }).setOrigin(0.5);
+    }).setOrigin(0.5).setInteractive({ useHandCursor: true });
 
-    this.input.keyboard.on('keydown_SHIFT', () => this.scene.start('GameScene'));
+    const startGame = () => this.scene.start('GameScene');
+    this.input.keyboard.on('keydown-SHIFT', startGame);
+    this.input.keyboard.on('keydown_SHIFT', startGame); // legacy alias, harmless
+    this.input.on('pointerdown', startGame);
+    startHint.on('pointerdown', startGame);
 
     // Video nod / credits
     this.add.text(centerX, height - 160, 'Inspired by: Charlie The Unicorn', {
