@@ -35,19 +35,22 @@
     <div class="gear-indicator" id="gearDisplay">GEAR: 1</div>
     <div id="instructions">
       <strong>CONTROLS</strong><br>
-      <kbd>SHIFT</kbd> - Shift gears<br>
+      <kbd>SHIFT</kbd> or tap - Shift gears<br>
       <strong>OBJECTIVE</strong><br>
-      Reach Candy Mountain while avoiding obstacles. Each gear changes more than just your speed!
+      Travel 1000 m to Candy Mountain. Dodge obstacles. Each gear changes more than just your speed!
     </div>
   </div>
   <script src="js/phaser.min.js"></script>
+  <script src="js/scenes/MenuScene.js"></script>
+  <script src="js/scenes/GameScene.js"></script>
+  <script src="js/scenes/GameOverScene.js"></script>
   <script>
     // Phaser 3 Game Configuration
     const PHASER_CONFIG = {
       type: Phaser.AUTO,
-      width: 400,
-      height: 600,
-      parent: 'phaser-example',
+      width: 800,
+      height: 500,
+      parent: null,
       physics: {
         default: 'arcade',
         arcade: {
@@ -55,15 +58,12 @@
           debug: false
         }
       },
-      scene: [MenuScene, GameScene, GameOverScene],
+      scene: [new MenuScene(), new GameScene(), new GameOverScene()],
       backgroundColor: '#87CEEB',
       pixelArt: true,
       roundPixels: true
     };
   </script>
-  <script src="js/scenes/MenuScene.js"></script>
-  <script src="js/scenes/GameScene.js"></script>
-  <script src="js/scenes/GameOverScene.js"></script>
   <script>
     const config = PHASER_CONFIG;
     const game = new Phaser.Game(config);

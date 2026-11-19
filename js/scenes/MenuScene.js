@@ -1,4 +1,8 @@
-export class MenuScene extends Phaser.Scene {
+class MenuScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'MenuScene' });
+  }
+
   create() {
     const { width, height } = this.scale;
     const centerX = width / 2;

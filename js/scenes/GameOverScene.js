@@ -1,4 +1,8 @@
-export class GameOverScene extends Phaser.Scene {
+class GameOverScene extends Phaser.Scene {
+  constructor() {
+    super({ key: 'GameOverScene' });
+  }
+
   create() {
     const { width, height } = this.scale;
     const centerX = width / 2;
