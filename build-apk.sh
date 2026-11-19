@@ -69,6 +69,8 @@ cat > "$ANDROID_PROJECT/AndroidManifest.xml" << 'MANIFEST'
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
 
         <activity
@@ -91,7 +93,7 @@ MANIFEST
 cat > "$ANDROID_PROJECT/res/values/strings.xml" << 'STRINGS'
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Shift Mountain</string>
+    <string name="app_name">Candy Mountain The Game</string>
 </resources>
 STRINGS
 
@@ -130,6 +132,45 @@ public class MainActivity extends Activity {
 JAVA
 
 echo "✓ Android project files created"
+
+# Generate square and round launcher icons from the master app icon.
+python3 - << 'ICONPY'
+import glob
+from pathlib import Path
+from PIL import Image, ImageDraw, ImageOps
+
+GAME_DIR = Path('/root/projects/shift-mountain')
+ANDROID_PROJECT = Path('/root/projects/shift-mountain-android')
+master_candidates = sorted(glob.glob(str(GAME_DIR / "assets" / "candy-mountain-icon.*")))
+if not master_candidates:
+    raise SystemExit("Icon master not found at assets/candy-mountain-icon.*")
+master = Path(master_candidates[0])
+img = Image.open(master).convert("RGBA")
+
+# Android square icons are full-bleed; circular icons need an alpha mask.
+sizes = {
+    "mipmap-mdpi": 48,
+    "mipmap-hdpi": 72,
+    "mipmap-xhdpi": 96,
+    "mipmap-xxhdpi": 144,
+    "mipmap-xxxhdpi": 192,
+}
+for folder, size in sizes.items():
+    square = ImageOps.fit(img, (size, size), Image.LANCZOS, centering=(0.5, 0.5))
+    target = ANDROID_PROJECT / "res" / folder
+    target.mkdir(parents=True, exist_ok=True)
+
+    square.save(target / "ic_launcher.png", optimize=True)
+
+    mask = Image.new("L", (size, size), 0)
+    draw = ImageDraw.Draw(mask)
+    draw.ellipse((0, 0, size - 1, size - 1), fill=255)
+    round_icon = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    round_icon.paste(square, mask=mask)
+    round_icon.save(target / "ic_launcher_round.png", optimize=True)
+
+print("✓ Launcher icons generated from " + str(master))
+ICONPY
 
 # ============================================================
 # STEP 4: Copy game assets into assets/www/
@@ -185,11 +226,15 @@ fi
 "$ZIPALIGN" -f 4 "$BUILD/base.apk" "$BUILD/aligned.apk"
 
 # sign
-KEYSTORE="$BUILD/debug.keystore"
-keytool -genkeypair -v -keystore "$KEYSTORE" \
-    -storepass android -alias androiddebugkey -keypass android \
-    -keyalg RSA -keysize 2048 -validity 10000 \
-    -dname "CN=Android Debug,O=Android,C=US" >/dev/null 2>&1
+KEYSTORE="$GAME_DIR/android-debug.keystore"
+if [ ! -f "$KEYSTORE" ]; then
+    keytool -genkeypair -v -keystore "$KEYSTORE" \
+        -storepass android -alias androiddebugkey -keypass android \
+        -keyalg RSA -keysize 2048 -validity 10000 \
+        -dname "CN=Android Debug,O=Android,C=US" >/dev/null 2>&1
+else
+    echo "✓ Reusing persistent debug signing key"
+fi
 "$APKSIGNER" sign \
     --ks "$KEYSTORE" --ks-pass pass:android --key-pass pass:android \
     --out "$ANDROID_PROJECT/Shift-Mountain.apk" "$BUILD/aligned.apk" >/dev/null 2>&1

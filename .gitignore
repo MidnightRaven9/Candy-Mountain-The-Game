@@ -29,3 +29,5 @@ plugins/
 # Screenshot assets (generated)
 screenshots/
 shift-mountain.zip
+
+android-debug.keystore
