@@ -60,8 +60,8 @@ cat > "$ANDROID_PROJECT/AndroidManifest.xml" << 'MANIFEST'
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.shif.mountain"
-    android:versionCode="6"
-    android:versionName="1.0.6">
+    android:versionCode="7"
+    android:versionName="1.0.7">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />

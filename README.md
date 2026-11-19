@@ -99,3 +99,10 @@ Character sprites are embedded as base64 data URIs in `js/sprites-data.js` (gene
 ## v1.0.6
 
 Fixed the purple screen: Phaser 3's `camera.flash()` takes `(duration, red, green, blue)`, not a packed hex color. The old calls produced a ~2.5-hour purple overlay on every gear shift. Characters are now simple cute chibi unicorns drawn procedurally with shapes, with no external asset loading.
+
+
+## v1.0.7
+
+Fixed two gameplay bugs. Ground/ceiling static bodies now use `setDisplaySize(width, ...)` before `refreshBody()`, so the collider spans the full 800px instead of shrinking back to the 96px texture width — the unicorn no longer falls through the floor and vanishes. Tap input now routes through a single debounced DOM bridge in `index.html` (`window.gameTap`), assigned by each active scene, so tapping reliably cycles gears on Android WebView.
+
+Verified: ground body 800x40, tap cycles gear 1->2, player rests at y~390 on the ground, flash duration 150ms, no JS errors.

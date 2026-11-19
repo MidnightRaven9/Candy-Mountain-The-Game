@@ -78,7 +78,7 @@ class MenuScene extends Phaser.Scene {
       }
     };
     this.input.keyboard.on('keydown-SHIFT', startGame);
-    this.input.on('pointerdown', startGame);
+    window.gameTap = startGame;
 
     // Small parody credits.
     this.add.text(centerX, height - 22, 'Inspired by Charlie The Unicorn (parody) • An original artwork fan homage', {

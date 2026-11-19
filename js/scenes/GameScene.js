@@ -32,14 +32,14 @@ class GameScene extends Phaser.Scene {
     // Ground (visual strip + invisible solid floor).
     this.add.tileSprite(width / 2, floorY + 20, width, 40, 'ground');
     const groundBody = this.physics.add.staticSprite(width / 2, floorY + 20, 'ground');
-    groundBody.body.setSize(width, 40);
+    groundBody.setDisplaySize(width, 40);
     groundBody.setVisible(false);
     groundBody.refreshBody();
 
     // Invisible ceiling prevents gear 2 from running off the top.
     const ceilingBody = this.physics.add.staticSprite(width / 2, ceilY - 40, 'ground');
+    ceilingBody.setDisplaySize(width, 80);
     ceilingBody.setVisible(false);
-    ceilingBody.body.setSize(width, 80);
     ceilingBody.refreshBody();
     this.ground = this.physics.add.staticGroup();
     this.ground.add(groundBody).add(ceilingBody);
@@ -105,13 +105,13 @@ class GameScene extends Phaser.Scene {
       this.shiftGear();
     });
 
-    // Tap/click also shifts gear.
-    this.input.on('pointerdown', () => {
+    // Tap/click shifts gear via the one debounced DOM input path.
+    window.gameTap = () => {
       if (this.isGameOver) return;
       if (this.time.now - this.time.lastShift < this.gearCooldown) return;
       this.time.lastShift = this.time.now;
       this.shiftGear();
-    });
+    };
 
     this.nextObstacleAt = 1600;
 
@@ -221,7 +221,7 @@ class GameScene extends Phaser.Scene {
     }).setOrigin(0.5).setScrollFactor(0).setDepth(82).setInteractive({ useHandCursor: true });
 
     const restart = () => toMenu ? this.scene.start('MenuScene') : this.restartGame();
-    btn.on('pointerdown', restart);
+    window.gameTap = restart;
     this.addShiftKey(() => {
       if (this.isGameOver) restart();
     });
