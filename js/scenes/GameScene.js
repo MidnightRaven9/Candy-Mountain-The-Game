@@ -11,21 +11,16 @@ class GameScene extends Phaser.Scene {
     this.isGameOver = false;
   }
 
-  preload() {
-    this.load.image('charlie', SPRITE_DATA.charlie);
-    this.load.image('buddyBlue', SPRITE_DATA.buddyBlue);
-    this.load.image('buddyPink', SPRITE_DATA.buddyPink);
-  }
+  preload() {}
 
   create() {
     const { width, height } = this.scale;
     const floorY = height - 34;
     const ceilY = 34;
-    const spriteLoaded = this.textures.exists('charlie');
     TextureFactory.createTextures(this);
     TextureFactory.ensureCreatures(this);
     if (window.gameStatus) {
-      window.gameStatus('Play · ' + (spriteLoaded ? 'sprite OK' : 'FALLBACK art'));
+      window.gameStatus('Play · ' + 'cute art');
     }
 
     // Full-bleed painted sky and rainbow backdrop.
@@ -143,17 +138,17 @@ class GameScene extends Phaser.Scene {
     switch (this.gear) {
       case 1:
         this.player.setGravityY(520);
-        this.cameras.main.flash(0x87ceff, 70, 0.08);
+        this.cameras.main.flash(150, 135, 206, 235);
         break;
       case 2:
         this.player.setGravityY(-520);
-        this.cameras.main.flash(0xffffff, 120, 0.25);
+        this.cameras.main.flash(150, 255, 255, 255);
         break;
       case 3:
         this.slowMoActive = true;
         this.physics.world.timeScale = 0.45;
         this.player.setGravityY(520);
-        this.cameras.main.flash(0xb8e8ff, 120, 0.3);
+        this.cameras.main.flash(150, 184, 232, 255);
         this.time.delayedCall(3000, () => {
           if (this.gear === 3) {
             this.physics.world.timeScale = 1;
@@ -166,7 +161,7 @@ class GameScene extends Phaser.Scene {
       case 4:
         this.nitroActive = true;
         this.player.setGravityY(520);
-        this.cameras.main.flash(0xff9f43, 120, 0.25);
+        this.cameras.main.flash(150, 255, 159, 67);
         this.time.delayedCall(2500, () => {
           if (this.gear === 4) {
             this.nitroActive = false;
@@ -241,7 +236,7 @@ class GameScene extends Phaser.Scene {
     this.isGameOver = true;
     this.physics.pause();
     this.cameras.main.stopFollow();
-    this.cameras.main.flash(0xffd84d, 500, 0.45);
+    this.cameras.main.flash(300, 255, 216, 77);
 
     this.add.rectangle(400, 250, 800, 500, 0x102b3a, 0.72).setDepth(80);
     this.add.text(400, 140, 'YOU REACHED', {

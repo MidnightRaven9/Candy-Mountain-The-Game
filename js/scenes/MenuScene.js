@@ -3,19 +3,14 @@ class MenuScene extends Phaser.Scene {
     super({ key: 'MenuScene' });
   }
 
-  preload() {
-    this.load.image('charlie', SPRITE_DATA.charlie);
-    this.load.image('buddyBlue', SPRITE_DATA.buddyBlue);
-    this.load.image('buddyPink', SPRITE_DATA.buddyPink);
-  }
+  preload() {}
 
   create() {
     const { width, height } = this.scale;
     const centerX = width / 2;
-    const spriteLoaded = this.textures.exists('charlie');
     TextureFactory.createTextures(this);
     TextureFactory.ensureCreatures(this);
-    const tex = spriteLoaded ? 'sprite OK' : 'FALLBACK art';
+    const tex = 'cute art';
     if (window.gameStatus) window.gameStatus('Menu · ' + tex);
 
     // Full-bleed painted sunset / rainbow / mountains.

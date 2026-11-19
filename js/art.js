@@ -274,50 +274,75 @@ const TextureFactory = {
   }
 };
 
-/** Last-resort procedural creatures if image decoding is unavailable. */
+/** Simple, cute chibi characters drawn with shapes only. No files, no loaders. */
 TextureFactory.ensureCreatures = function (scene) {
-  var g;
   if (!scene.textures.exists('charlie')) {
-    g = scene.add.graphics();
-    g.fillStyle(0x000000, 0.18);
-    g.fillEllipse(48, 72, 52, 7);
-    g.fillStyle(0xfaf6ed);
-    g.fillEllipse(34, 47, 42, 27);
-    g.fillPoints([[46, 41], [52, 26], [63, 22], [74, 39], [62, 55]], true);
-    g.fillEllipse(68, 27, 30, 26);
-    g.fillEllipse(77, 33, 21, 14);
-    [16, 28, 48, 61].forEach(function (ox) {
-      g.fillRoundedRect(ox, 52, 8, 20, 4);
-      g.fillStyle(0x2a2535);
-      g.fillRect(ox, 68, 8, 4);
-      g.fillStyle(0xfaf6ed);
+    var g = scene.add.graphics();
+
+    // Rainbow mane and tail streaming behind.
+    [[12, 42, 13, 0xff6fae], [10, 57, 12, 0xffb03a], [16, 71, 11, 0x2fd3c6], [24, 83, 10, 0xb36cff]].forEach(function (m) {
+      g.fillStyle(m[3]); g.fillCircle(m[0], m[1], m[2]);
     });
-    var mane = [0x23d5cf, 0x1aa6b4, 0xff4f9a, 0xff8fb5];
-    [[60, 3, 11], [50, 10, 13], [42, 18, 15], [33, 28, 16], [23, 39, 15], [14, 49, 13]].forEach(function (p, i) {
-      g.fillStyle(mane[i % mane.length]);
-      g.fillCircle(p[0], p[1], p[2]);
-    });
-    g.fillStyle(0xffe66d);
-    g.fillTriangle(66, 8, 73, -22, 82, 12);
-    g.fillStyle(0x18212e);
-    g.fillEllipse(72, 26, 6.5, 8.5);
-    g.fillStyle(0xffffff);
-    g.fillCircle(74.4, 23.5, 1.7);
-    g.generateTexture('charlie', 96, 78);
+
+    // Tiny body, stubby legs, little hooves.
+    g.fillStyle(0xfffaf0);
+    g.fillEllipse(40, 78, 40, 30);
+    [27, 39, 51].forEach(function (x) { g.fillRoundedRect(x, 88, 9, 14, 4); });
+    g.fillStyle(0x3b3a52);
+    [27, 39, 51].forEach(function (x) { g.fillRoundedRect(x, 97, 9, 6, 2); });
+
+    // Big round head and soft snout.
+    g.fillStyle(0xfffaf0);
+    g.fillCircle(58, 48, 30);
+    g.fillEllipse(79, 60, 26, 20);
+
+    // Ears.
+    g.fillStyle(0xfffaf0);
+    g.fillTriangle(37, 29, 33, 9, 55, 25);
+    g.fillStyle(0xffa8c6);
+    g.fillTriangle(40, 26, 37, 15, 51, 24);
+
+    // Candy-striped horn.
+    g.fillStyle(0xffd84d);
+    g.fillTriangle(50, 25, 60, 2, 70, 27);
+    g.lineStyle(2, 0xff6fae);
+    g.lineBetween(54, 13, 66, 10);
+    g.lineBetween(52, 21, 68, 18);
+
+    // Fringe over the forehead.
+    g.fillStyle(0xff6fae); g.fillCircle(44, 27, 11);
+    g.fillStyle(0x2fd3c6); g.fillCircle(35, 36, 10);
+    g.fillStyle(0xffb03a); g.fillCircle(30, 46, 8);
+
+    // One big sparkly eye, blush, nostril and smile.
+    g.fillStyle(0x2b2b40); g.fillEllipse(70, 46, 9, 12);
+    g.fillStyle(0xffffff); g.fillCircle(72, 41, 3.5);
+    g.fillStyle(0xffa8c6); g.fillCircle(80, 60, 5);
+    g.fillStyle(0xbd8f8f); g.fillCircle(87, 57, 2);
+    g.lineStyle(2, 0xbd8f8f);
+    g.beginPath(); g.arc(79, 62, 7, 0.2, Math.PI * 0.8); g.strokePath();
+
+    g.generateTexture('charlie', 110, 110);
     g.destroy();
   }
-  [['buddyBlue', 0x2bcaff], ['buddyPink', 0xc366ff]].forEach(function (pair) {
+
+  [['buddyBlue', 0x3ec8ff], ['buddyPink', 0xff7ac6]].forEach(function (pair) {
     if (scene.textures.exists(pair[0])) return;
-    g = scene.add.graphics();
+    var g = scene.add.graphics();
     g.fillStyle(pair[1]);
-    g.fillEllipse(25, 26, 34, 26);
+    g.fillCircle(30, 32, 24);
+    g.fillCircle(30, 50, 18);
+    g.fillStyle(0xffd84d);
+    g.fillTriangle(25, 15, 31, 2, 37, 15);
     g.fillStyle(0xffffff);
-    g.fillCircle(20, 22, 4);
-    g.fillCircle(32, 22, 4);
-    g.fillStyle(0x18212e);
-    g.fillCircle(21, 22, 2);
-    g.fillCircle(33, 22, 2);
-    g.generateTexture(pair[0], 52, 46);
+    g.fillCircle(22, 30, 8); g.fillCircle(38, 30, 8);
+    g.fillStyle(0x2b2b40);
+    g.fillCircle(23, 30, 4); g.fillCircle(39, 30, 4);
+    g.lineStyle(2, 0x2b2b40);
+    g.beginPath(); g.arc(30, 42, 8, 0.2, Math.PI - 0.2); g.strokePath();
+    g.fillStyle(0x2b2b40);
+    g.fillRoundedRect(16, 56, 10, 6, 3); g.fillRoundedRect(34, 56, 10, 6, 3);
+    g.generateTexture(pair[0], 60, 64);
     g.destroy();
   });
 };
