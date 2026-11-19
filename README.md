@@ -1,4 +1,4 @@
-# Shift Mountain
+# Candy Mountain The Game
 
 **Game Off 2026 Entry** — Theme: **SHIFT**
 
@@ -83,4 +83,4 @@ MIT — see `LICENSE`. Free for learning, jams, and modification.
 - Theme: **SHIFT** — interpreted as a gear-shifting racer
 - Submissions close December 1, 2026
 
-Inspired by the *Charlie The Unicorn* video. Fair-use parody for game-jam purposes.
+Inspired by the *Charlie The Unicorn* video as a parody fan homage. Fair-use parody for game-jam purposes.

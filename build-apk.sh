@@ -71,7 +71,7 @@ cat > "$ANDROID_PROJECT/AndroidManifest.xml" << 'MANIFEST'
         android:label="@string/app_name"
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher_round"
-        android:theme="@android:style/Theme.Light.NoTitleBar.Fullscreen">
+        android:theme="@style/AppTheme">
 
         <activity
             android:name=".MainActivity"
@@ -96,6 +96,27 @@ cat > "$ANDROID_PROJECT/res/values/strings.xml" << 'STRINGS'
     <string name="app_name">Candy Mountain The Game</string>
 </resources>
 STRINGS
+
+cat > "$ANDROID_PROJECT/res/values/themes.xml" << 'THEMES'
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="android:Theme.Light.NoTitleBar.Fullscreen">
+        <item name="android:windowBackground">#87CEEB</item>
+        <item name="android:statusBarColor">#1b3344</item>
+        <item name="android:navigationBarColor">#1b3344</item>
+    </style>
+</resources>
+THEMES
+
+cat > "$ANDROID_PROJECT/res/values/colors.xml" << 'COLORS'
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="sky_blue">#87CEEB</color>
+    <color name="candy_dark">#1b3344</color>
+    <color name="candy_pink">#ff4fa3</color>
+    <color name="candy_gold">#ffd84d</color>
+</resources>
+COLORS
 
 cat > "$ANDROID_PROJECT/res/layout/activity_main.xml" << 'LAYOUT'
 <?xml version="1.0" encoding="utf-8"?>
@@ -177,6 +198,7 @@ ICONPY
 # ============================================================
 cp "$GAME_DIR/index.html" "$ANDROID_PROJECT/assets/www/index.html"
 cp "$GAME_DIR/js/phaser.min.js" "$ANDROID_PROJECT/assets/www/js/phaser.min.js"
+cp "$GAME_DIR/js/art.js" "$ANDROID_PROJECT/assets/www/js/art.js"
 cp "$GAME_DIR/js/scenes/MenuScene.js" "$ANDROID_PROJECT/assets/www/js/scenes/MenuScene.js"
 cp "$GAME_DIR/js/scenes/GameScene.js" "$ANDROID_PROJECT/assets/www/js/scenes/GameScene.js"
 cp "$GAME_DIR/js/scenes/GameOverScene.js" "$ANDROID_PROJECT/assets/www/js/scenes/GameOverScene.js"

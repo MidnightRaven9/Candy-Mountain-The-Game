@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Shift Mountain - Game Off 2026</title>
+  <title>Candy Mountain The Game - Game Off 2026</title>
   <style>
     * { margin: 0; padding: 0; box-sizing: border-box; }
     html, body { width: 100%; height: 100%; overflow: hidden; background: #111; }
@@ -32,14 +32,36 @@
   </style>
 </head>
 <body>
+  <div id="runtimeError" style="display:none;position:fixed;left:8px;right:8px;top:8px;z-index:99999;background:#14061f;color:#ffb3ff;border:2px solid #ff5bff;border-radius:8px;padding:10px 12px;font:12px/1.45 monospace;white-space:pre-wrap;max-height:45vh;overflow:auto;box-shadow:0 8px 40px #000;"></div>
+  <script>
+    (function () {
+      var box = document.getElementById('runtimeError');
+      function body(err) {
+        var message = err && (err.stack || err.message || err.reason || err);
+        return message ? String(message) : 'Unknown startup/runtime error';
+      }
+      function show(prefix, err) {
+        if (!box) return;
+        box.style.display = 'block';
+        box.textContent = prefix + ':\n' + body(err);
+      }
+      window.addEventListener('error', function (event) {
+        show('GAME ERROR', event.error || event.message);
+      });
+      window.addEventListener('unhandledrejection', function (event) {
+        show('GAME REJECTION', event.reason);
+      });
+    })();
+  </script>
   <script src="js/phaser.min.js"></script>
+  <script src="js/art.js"></script>
   <script src="js/scenes/MenuScene.js"></script>
   <script src="js/scenes/GameScene.js"></script>
   <script src="js/scenes/GameOverScene.js"></script>
   <script>
     // Phaser 3 Game Configuration
     const PHASER_CONFIG = {
-      type: Phaser.AUTO,
+      type: Phaser.CANVAS,
       scale: {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_BOTH,
