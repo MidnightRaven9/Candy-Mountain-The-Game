@@ -27,4 +27,5 @@ plugins/
 *.cache
 
 # Screenshot assets (generated)
-screenshots/shift-mountain.zip
+screenshots/
+shift-mountain.zip
